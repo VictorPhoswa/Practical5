@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color/1.0" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1qd4o67" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.20.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.4.0">
+  <bpmn:collaboration id="Collaboration_181r5i0">
+    <bpmn:participant id="self-service-rica" name="Self Service Rica" processRef="web-self-service-rica" />
+  </bpmn:collaboration>
+  <bpmn:process id="web-self-service-rica" name="web-self-service-rica" isExecutable="true">
+    <bpmn:laneSet id="LaneSet_1kwkck5">
+      <bpmn:lane id="Lane_1vpordu">
+        <bpmn:flowNodeRef>start</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>success</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Event_0mesz0o</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_17d8r4f">
+        <bpmn:flowNodeRef>capture-contact-information</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_0kbo0xf</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Event_1kdno12</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Event_0m67yqg</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Event_11lau3c</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Event_19dak4p</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="start" name="start">
+      <bpmn:outgoing>Flow_1353s48</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_1353s48" sourceRef="start" targetRef="Activity_0kbo0xf" />
+    <bpmn:sequenceFlow id="Flow_04l1eeh" sourceRef="capture-contact-information" targetRef="success" />
+    <bpmn:endEvent id="success" name="success">
+      <bpmn:incoming>Flow_04l1eeh</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:userTask id="capture-contact-information" name="Capture Contact Information">
+      <bpmn:incoming>Flow_0rfidar</bpmn:incoming>
+      <bpmn:outgoing>Flow_04l1eeh</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_0rfidar" sourceRef="Activity_0kbo0xf" targetRef="capture-contact-information" />
+    <bpmn:serviceTask id="Activity_0kbo0xf" zeebe:modelerTemplate="io.camunda.connectors.HttpJson.v2" zeebe:modelerTemplateVersion="7" zeebe:modelerTemplateIcon="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxOCAxOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE3LjAzMzUgOC45OTk5N0MxNy4wMzM1IDEzLjQ0NzUgMTMuNDI4MSAxNy4wNTI5IDguOTgwNjUgMTcuMDUyOUM0LjUzMzE2IDE3LjA1MjkgMC45Mjc3NjUgMTMuNDQ3NSAwLjkyNzc2NSA4Ljk5OTk3QzAuOTI3NzY1IDQuNTUyNDggNC41MzMxNiAwLjk0NzA4MyA4Ljk4MDY1IDAuOTQ3MDgzQzEzLjQyODEgMC45NDcwODMgMTcuMDMzNSA0LjU1MjQ4IDE3LjAzMzUgOC45OTk5N1oiIGZpbGw9IiM1MDU1NjIiLz4KPHBhdGggZD0iTTQuOTMxMjYgMTQuMTU3MUw2Ljc4MTA2IDMuNzE0NzFIMTAuMTM3NUMxMS4xOTE3IDMuNzE0NzEgMTEuOTgyNCAzLjk4MzIzIDEyLjUwOTUgNC41MjAyN0MxMy4wNDY1IDUuMDQ3MzYgMTMuMzE1IDUuNzMzNTggMTMuMzE1IDYuNTc4OTJDMTMuMzE1IDcuNDQ0MTQgMTMuMDcxNCA4LjE1NTIyIDEyLjU4NDEgOC43MTIxNUMxMi4xMDY3IDkuMjU5MTMgMTEuNDU1MyA5LjYzNzA1IDEwLjYyOTggOS44NDU5TDEyLjA2MTkgMTQuMTU3MUgxMC4zMzE1TDkuMDMzNjQgMTAuMDI0OUg3LjI0MzUxTDYuNTEyNTQgMTQuMTU3MUg0LjkzMTI2Wk03LjQ5NzExIDguNTkyODFIOS4yNDI0OEM5Ljk5ODMyIDguNTkyODEgMTAuNTkwMSA4LjQyMzc0IDExLjAxNzcgOC4wODU2MUMxMS40NTUzIDcuNzM3NTMgMTEuNjc0MSA3LjI2NTEzIDExLjY3NDEgNi42Njg0MkMxMS42NzQxIDYuMTkxMDYgMTEuNTI0OSA1LjgxODExIDExLjIyNjUgNS41NDk1OUMxMC45MjgyIDUuMjcxMTMgMTAuNDU1OCA1LjEzMTkgOS44MDkzNiA1LjEzMTlIOC4xMDg3NEw3LjQ5NzExIDguNTkyODFaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="io.camunda:http-json:1" retries="3" />
+        <zeebe:ioMapping>
+          <zeebe:input source="noAuth" target="authentication.type" />
+          <zeebe:input source="POST" target="method" />
+          <zeebe:input target="url" />
+          <zeebe:input source="20" target="connectionTimeoutInSeconds" />
+          <zeebe:input source="20" target="readTimeoutInSeconds" />
+          <zeebe:input source="0" target="writeTimeoutInSeconds" />
+        </zeebe:ioMapping>
+        <zeebe:taskHeaders>
+          <zeebe:header key="retryBackoff" value="PT0S" />
+        </zeebe:taskHeaders>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1353s48</bpmn:incoming>
+      <bpmn:outgoing>Flow_0rfidar</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:boundaryEvent id="Event_1kdno12" attachedToRef="Activity_0kbo0xf">
+      <bpmn:outgoing>Flow_1kv234f</bpmn:outgoing>
+      <bpmn:errorEventDefinition id="ErrorEventDefinition_00c1wez" />
+    </bpmn:boundaryEvent>
+    <bpmn:sequenceFlow id="Flow_1kv234f" sourceRef="Event_1kdno12" targetRef="Event_0mesz0o" />
+    <bpmn:endEvent id="Event_0mesz0o" name="failed">
+      <bpmn:incoming>Flow_1kv234f</bpmn:incoming>
+      <bpmn:terminateEventDefinition id="TerminateEventDefinition_1splh6v" />
+    </bpmn:endEvent>
+    <bpmn:boundaryEvent id="Event_0m67yqg" attachedToRef="Activity_0kbo0xf">
+      <bpmn:errorEventDefinition id="ErrorEventDefinition_0bi6uas" />
+    </bpmn:boundaryEvent>
+    <bpmn:boundaryEvent id="Event_11lau3c" attachedToRef="Activity_0kbo0xf">
+      <bpmn:errorEventDefinition id="ErrorEventDefinition_1aqulyn" />
+    </bpmn:boundaryEvent>
+    <bpmn:boundaryEvent id="Event_19dak4p" attachedToRef="Activity_0kbo0xf">
+      <bpmn:errorEventDefinition id="ErrorEventDefinition_1ushzyg" />
+    </bpmn:boundaryEvent>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_181r5i0">
+      <bpmndi:BPMNShape id="Participant_1ryk1lt_di" bpmnElement="self-service-rica" isHorizontal="true">
+        <dc:Bounds x="129" y="79" width="1201" height="431" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_17d8r4f_di" bpmnElement="Lane_17d8r4f" isHorizontal="true" bioc:stroke="#0d4372" bioc:fill="#bbdefb" color:background-color="#bbdefb" color:border-color="#0d4372">
+        <dc:Bounds x="159" y="280" width="1171" height="230" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_1vpordu_di" bpmnElement="Lane_1vpordu" isHorizontal="true">
+        <dc:Bounds x="159" y="79" width="1171" height="201" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="start" bioc:stroke="#0d4372" bioc:fill="#bbdefb" color:background-color="#bbdefb" color:border-color="#0d4372">
+        <dc:Bounds x="212" y="162" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="220" y="205" width="22" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0v72st2_di" bpmnElement="success" bioc:stroke="#205022" bioc:fill="#c8e6c9" color:background-color="#c8e6c9" color:border-color="#205022">
+        <dc:Bounds x="1102" y="162" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1101" y="205" width="40" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0m7r42n_di" bpmnElement="capture-contact-information">
+        <dc:Bounds x="930" y="360" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_11tbi1h_di" bpmnElement="Activity_0kbo0xf">
+        <dc:Bounds x="580" y="360" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0ihk1zq_di" bpmnElement="Event_0mesz0o" bioc:stroke="#831311" bioc:fill="#ffcdd2" color:background-color="#ffcdd2" color:border-color="#831311">
+        <dc:Bounds x="662" y="172" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="667" y="142" width="27" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1hjtjm0_di" bpmnElement="Event_1kdno12">
+        <dc:Bounds x="662" y="342" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0o0b5c5_di" bpmnElement="Event_0m67yqg">
+        <dc:Bounds x="562" y="342" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0e5b4vp_di" bpmnElement="Event_11lau3c">
+        <dc:Bounds x="562" y="422" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1g3bqls_di" bpmnElement="Event_19dak4p">
+        <dc:Bounds x="662" y="422" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1353s48_di" bpmnElement="Flow_1353s48">
+        <di:waypoint x="248" y="180" />
+        <di:waypoint x="394" y="180" />
+        <di:waypoint x="394" y="400" />
+        <di:waypoint x="580" y="400" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_04l1eeh_di" bpmnElement="Flow_04l1eeh">
+        <di:waypoint x="980" y="360" />
+        <di:waypoint x="980" y="180" />
+        <di:waypoint x="1102" y="180" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0rfidar_di" bpmnElement="Flow_0rfidar">
+        <di:waypoint x="680" y="400" />
+        <di:waypoint x="930" y="400" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1kv234f_di" bpmnElement="Flow_1kv234f">
+        <di:waypoint x="680" y="342" />
+        <di:waypoint x="680" y="208" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
